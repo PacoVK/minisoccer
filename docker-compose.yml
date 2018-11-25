@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+
+  frontend:
+    build:
+      context: client
+    container_name: frontend
+    ports:
+      - 80:5000
+    networks:
+      - drinkCounter
+
+  backend:
+    build:
+      context: server
+    container_name: backend
+    ports:
+      - 5000:5000
+      - 8000:8000
+    networks:
+      - drinkCounter
+
+  mongodb:
+    image: mongo
+    container_name: database
+    ports:
+      - 27017:27017
+    networks:
+      - drinkCounter
+
+volumes:
+  drinkCounter:
+
+networks:
+  drinkCounter:
