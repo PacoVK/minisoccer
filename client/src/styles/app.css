@@ -12,3 +12,11 @@
     margin: 10vm;
     margin-top: 5vmin;
 }
+
+.header-nav {
+    color: white !important;
+}
+
+.setup-btn {
+    float: right;
+}
