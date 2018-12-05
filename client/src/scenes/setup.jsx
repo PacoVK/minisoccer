@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import '../styles/app.css';
 import Header from '../components/header';
-
-
+import Grid from '@material-ui/core/Grid';
 
 class Setup extends Component {
 
@@ -11,7 +10,9 @@ class Setup extends Component {
             <div>
                 <Header/>
                 <div className="container">
-                    <h1>Setup</h1>
+                    <Grid container>
+
+                    </Grid>
                 </div>
             </div>
         );
