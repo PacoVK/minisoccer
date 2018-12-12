@@ -21,11 +21,16 @@ services:
     networks:
       - drinkCounter
 
-  mongodb:
-    image: mongo
+  postgres:
+    build:
+      context: database
     container_name: database
-    ports:
-      - 27017:27017
+    volumes:
+      - drinkCounter:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: suP3rs3cRe7
+      POSTGRES_USER: sgfo
+      POSTGRES_DB: sgfo
     networks:
       - drinkCounter
 

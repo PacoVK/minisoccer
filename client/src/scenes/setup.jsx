@@ -11,7 +11,6 @@ class Setup extends Component {
                 <Header/>
                 <div className="container">
                     <Grid container>
-
                     </Grid>
                 </div>
             </div>

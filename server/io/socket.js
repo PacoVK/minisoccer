@@ -10,6 +10,10 @@ module.exports.createSocketListener = (io) => {
             console.log('message: ' + msg);
             callback('pong');
         },);
+
+        socket.on('end', () => {
+            socket.disconnect(0);
+        });
     });
 
 

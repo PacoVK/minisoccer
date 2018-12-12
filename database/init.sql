@@ -1,0 +1,21 @@
+DROP DATABASE IF EXISTS sgfo;
+CREATE DATABASE sgfo;
+
+\c sgfo;
+
+CREATE TABLE teams (
+  ID SERIAL PRIMARY KEY,
+  name VARCHAR
+);
+
+CREATE TABLE consum (
+  ID SERIAL PRIMARY KEY,
+  team VARCHAR,
+  drink VARCHAR,
+  amount NUMERIC
+);
+
+CREATE TABLE drinks (
+  ID SERIAL PRIMARY KEY,
+  name VARCHAR
+);

@@ -11,10 +11,14 @@ class Home extends Component {
     state = {
         drinks: ["Asbach","Captn Cola","Bier","Schorle"],
         open: false,
+        selectedDrink: undefined,
     };
 
-    onOpenModal = () => {
-        this.setState({ open: true });
+    onOpenModal = (event) => {
+        this.setState({
+            open: true,
+            selectedDrink: event.target.value
+        });
     };
 
     onCloseModal = () => {
@@ -25,8 +29,8 @@ class Home extends Component {
         let drinkButtons = [];
         this.state.drinks.forEach((drink) => {
            drinkButtons.push(
-               <Grid className={"drink-grid"} key={drink} item xs={12} sm={4}>
-                   <Drink drink={drink} action={this.onOpenModal}/>
+               <Grid className={"drink-grid"} key={drink} item xs={12} sm={6}>
+                   <Drink value={drink} action={this.onOpenModal}/>
                </Grid>
            );
         });
@@ -44,7 +48,7 @@ class Home extends Component {
                         ) : null}
                     </Grid>
                     <Modal open={this.state.open} onClose={this.onCloseModal} closeOnOverlayClick={false} center>
-                        <Dialog/>
+                        <Dialog selectedDrink={this.state.selectedDrink}/>
                     </Modal>
                 </div>
             </div>

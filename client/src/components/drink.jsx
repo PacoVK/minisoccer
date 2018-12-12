@@ -8,8 +8,8 @@ class Drink extends PureComponent {
         return (
             <React.Fragment>
                 <Paper>
-                    <Button fullWidth onClick={this.props.action} >
-                        <h1>{this.props.drink}</h1>
+                    <Button value={this.props.value} fullWidth onClick={this.props.action}>
+                        <h1>{this.props.value}</h1>
                     </Button>
                 </Paper>
             </React.Fragment>
