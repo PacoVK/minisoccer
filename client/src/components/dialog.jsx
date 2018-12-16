@@ -5,6 +5,7 @@ import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
+import '../styles/app.css';
 
 class Dialog extends PureComponent {
 
@@ -37,7 +38,7 @@ class Dialog extends PureComponent {
         let teamsButtons = [];
         this.state.teams.forEach((team) => {
             teamsButtons.push(
-                <ToggleButton selected={this.state.selectedTeam === team.name} key={team.name} value={team.name}>
+                <ToggleButton classes={{selected: "test"}} selected={this.state.selectedTeam === team.name} key={team.name} value={team.name}>
                     {team.name}
                 </ToggleButton>
             );
@@ -84,7 +85,7 @@ class Dialog extends PureComponent {
                         <Button fullWidth onClick={this.save} >
                             <h3>speichern</h3>
                         </Button>
-                        <p hidden={!this.state.error}>Bitte Team w&auml;hlen und Anzahl der Getr&auml;nke eingeben</p>
+                        <p hidden={!this.state.error}>Bitte Team wählen und Anzahl der Getränke eingeben</p>
                     </Grid>
                 </Grid>
             </React.Fragment>
