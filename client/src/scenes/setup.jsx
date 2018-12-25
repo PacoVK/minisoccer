@@ -3,6 +3,7 @@ import Header from '../components/header';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 class Setup extends Component {
 
@@ -22,14 +23,22 @@ class Setup extends Component {
     onSaveTeam(event){
         if(this.state.teamName.length > 0){
             console.log(this.state.teamName);
-            this.setState({teamName: ''});
+            axios.post('http://localhost:5001/team', {
+                name: this.state.teamName
+            } ).then(()=>{
+                this.setState({teamName: ''});
+            });
         }
     }
 
     onSaveDrink(event){
         if(this.state.drink.length > 0){
             console.log(this.state.drink);
-            this.setState({drink: ''});
+            axios.post('http://localhost:5001/drink', {
+                name: this.state.drink
+            } ).then(()=>{
+                this.setState({drink: ''});
+            });
         }
     }
 

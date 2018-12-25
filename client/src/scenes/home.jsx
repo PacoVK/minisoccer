@@ -5,19 +5,26 @@ import Grid from '@material-ui/core/Grid';
 import Drink from '../components/drink';
 import Dialog from '../components/dialog';
 import Modal from 'react-responsive-modal';
+import axios from 'axios';
 
 class Home extends Component {
 
     state = {
-        drinks: ["Asbach","Captn Cola","Bier","Schorle"],
+        drinks: [],
         open: false,
         selectedDrink: undefined,
     };
 
+    componentDidMount(){
+        axios.get('http://localhost:5001/drinks').then((response) => {
+            this.setState({drinks: response.data.drinks});
+        })
+    }
+
     onOpenModal = (event) => {
         this.setState({
             open: true,
-            selectedDrink: event.target.value
+            selectedDrink: event.currentTarget.value
         });
     };
 
@@ -29,8 +36,8 @@ class Home extends Component {
         let drinkButtons = [];
         this.state.drinks.forEach((drink) => {
            drinkButtons.push(
-               <Grid className={"drink-grid"} key={drink} item xs={12} sm={6}>
-                   <Drink value={drink} action={this.onOpenModal}/>
+               <Grid className={"drink-grid"} key={drink.id} item xs={12} sm={6}>
+                   <Drink value={drink.name} action={this.onOpenModal}/>
                </Grid>
            );
         });
@@ -48,7 +55,7 @@ class Home extends Component {
                         ) : null}
                     </Grid>
                     <Modal open={this.state.open} onClose={this.onCloseModal} closeOnOverlayClick={false} center>
-                        <Dialog selectedDrink={this.state.selectedDrink}/>
+                        <Dialog saveCallBack={() => {this.setState({ open: false })}} selectedDrink={this.state.selectedDrink}/>
                     </Modal>
                 </div>
             </div>

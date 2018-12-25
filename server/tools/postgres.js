@@ -4,9 +4,9 @@ let options = {
     promiseLib: promise
 };
 
-const DB_HOST = 'postgres';
+const DB_HOST = 'localhost';
 const DB_PORT = 5432;
-const DB_USER = 'admin';
+const DB_USER = 'postgres';
 const DB_PASSWD = 'suP3rs3cRe7';
 const DB = 'sgfo';
 
@@ -96,15 +96,32 @@ createDrink = (req, res, next) =>{
         });
 };
 
-calculateConsumForTeams = (req, res, next) =>{
-    db.any('select t.team, t.drink, sum(t.amount) from (select * from consum inner join drinks on ' +
-        '(consum.drink = drinks.name) group by consum.id, drinks.id) as t ' +
-        'where t.drink=t.name group by t.team, t.drink order by t.team')
-        .then((data) => {
+createOrder = (req, res, next) =>{
+    req.body.amount = parseInt(req.body.amount);
+    db.none('insert into consum(team, drink, amount)' +
+        'values(${name}, ${drink}, ${amount})',
+        req.body)
+        .then(() => {
             res.status(200)
                 .json({
                     status: 'success',
-                    result: data,
+                    message: 'Inserted order ${amount} from ${name}'
+                });
+        })
+        .catch((err) => {
+            return next(err);
+        });
+};
+
+calculateConsumForTeams = (req, res, next) =>{
+    db.any('select t.team, sum(t.amount) as total from (select * from consum inner join drinks on ' +
+        '(consum.drink = drinks.name) group by consum.id, drinks.id) as t ' +
+        'where t.drink=t.name group by t.team order by total desc')
+        .then((result) => {
+            res.status(200)
+                .json({
+                    status: 'success',
+                    orders: result,
                 });
         })
         .catch((err) => {
@@ -118,5 +135,6 @@ module.exports = {
     removeTeam: removeTeam,
     getAllDrinks: getAllDrinks,
     createDrink: createDrink,
+    createOrder: createOrder,
     calculateConsumForTeams: calculateConsumForTeams
 };

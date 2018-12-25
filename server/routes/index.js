@@ -3,26 +3,15 @@ const router = express.Router();
 
 const db = require('../tools/postgres');
 
-router.get('/hello', (req, res) => {
-        res.status(200).json({message: 'Hello from Backend!'});
-    }
-);
-
 router.post('/team', db.createTeam);
 
 router.get('/teams', db.getAllTeams);
 
-router.post('/drink', (req,res) => {
+router.post('/drink', db.createDrink);
 
-});
+router.get('/drinks', db.getAllDrinks);
 
-router.get('/drinks', (req,res) => {
-
-});
-
-router.post('/order', (req,res) => {
-
-});
+router.post('/order', db.createOrder);
 
 router.get('/orders', db.calculateConsumForTeams);
 

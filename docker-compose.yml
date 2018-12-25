@@ -29,7 +29,7 @@ services:
       - drinkCounter:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: suP3rs3cRe7
-      POSTGRES_USER: sgfo
+      POSTGRES_USER: postgres
       POSTGRES_DB: sgfo
     networks:
       - drinkCounter

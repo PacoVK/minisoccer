@@ -26,7 +26,7 @@ class Header extends PureComponent {
             <header className="App-header">
                 <Grid container>
                     <Grid item xs={12}>
-                        <Button style={{marginRight: '5px', backgroundColor: 'rgba(255, 255, 255, 0.8)'}} variant={"outlined"} onClick={this.goToHome}>Home</Button>
+                        <Button style={{marginRight: '5px', backgroundColor: 'rgba(255, 255, 255, 0.8)'}} variant={"outlined"} onClick={this.goToHome}>Drinks</Button>
                         <Button style={{marginRight: '5px', backgroundColor: 'rgba(255, 255, 255, 0.8)'}} variant={"outlined"} onClick={this.goToStats}>Stats</Button>
                         <IconButton style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)'}} className="setup-btn" onClick={this.goToSettings}>
                             <SetupIcon/>

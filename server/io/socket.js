@@ -1,14 +1,15 @@
 module.exports.createSocketListener = (io) => {
 
     io.on('connection', (socket) => {
-        console.log('a user connected');
-        socket.on('disconnect', function () {
+
+        console.log('a user connected ');
+
+        socket.on('disconnect', () => {
             console.log('User Disconnected');
         });
 
-        socket.on('test', (msg, callback) => {
-            console.log('message: ' + msg);
-            callback('pong');
+        socket.on('saved', () => {
+            io.sockets.emit('update');
         },);
 
         socket.on('end', () => {

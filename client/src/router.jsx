@@ -10,7 +10,7 @@ const GraficsScene = () => {
     )
 };
 
-const HomeScene = () => {
+const DrinksScene = () => {
     return(
         <Home/>
     )
@@ -25,7 +25,7 @@ const SetupScene = () => {
 const routes = () => {
     return(
         <Router>
-            <HomeScene path="/"/>
+            <DrinksScene path="/"/>
             <GraficsScene path="/statistic" />
             <SetupScene path="/setup"/>
         </Router>
