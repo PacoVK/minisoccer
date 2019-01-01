@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
+import {API_CONNECTION_URL} from '../const';
 
 class Setup extends Component {
 
@@ -22,8 +23,7 @@ class Setup extends Component {
 
     onSaveTeam(event){
         if(this.state.teamName.length > 0){
-            console.log(this.state.teamName);
-            axios.post('http://localhost:5001/team', {
+            axios.post(API_CONNECTION_URL+'/team', {
                 name: this.state.teamName
             } ).then(()=>{
                 this.setState({teamName: ''});
@@ -33,13 +33,18 @@ class Setup extends Component {
 
     onSaveDrink(event){
         if(this.state.drink.length > 0){
-            console.log(this.state.drink);
-            axios.post('http://localhost:5001/drink', {
+            axios.post(API_CONNECTION_URL+'/drink', {
                 name: this.state.drink
             } ).then(()=>{
                 this.setState({drink: ''});
             });
         }
+    }
+
+    onResetConsum(event){
+            axios.delete(API_CONNECTION_URL+'/orders').then(()=>{
+                console.log('Reset sucess');
+            });
     }
 
     onChangeTeamName(event){
@@ -82,6 +87,18 @@ class Setup extends Component {
                                 <Grid item xs={12} md={4}>
                                     <Button variant={"contained"} onClick={this.onSaveDrink}>
                                         Speichern
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Grid container justify={"center"} spacing={16}>
+                                <Grid item xs={12}>
+                                    <h2>Statistik</h2>
+                                </Grid>
+                                <Grid item xs={12} md={4}>
+                                    <Button variant={"contained"} onClick={this.onResetConsum}>
+                                        Reset
                                     </Button>
                                 </Grid>
                             </Grid>

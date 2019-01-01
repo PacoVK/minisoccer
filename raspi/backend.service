@@ -1,0 +1,13 @@
+[Unit]
+Description=Minisoccer Backend
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/etc/minisoccer/backend
+User=pi
+ExecStart=/usr/bin/yarn start
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

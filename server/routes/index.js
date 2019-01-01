@@ -15,4 +15,6 @@ router.post('/order', db.createOrder);
 
 router.get('/orders', db.calculateConsumForTeams);
 
+router.delete('/orders', db.resetConsum);
+
 module.exports = router;

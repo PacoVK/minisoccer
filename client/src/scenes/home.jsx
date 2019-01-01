@@ -6,6 +6,7 @@ import Drink from '../components/drink';
 import Dialog from '../components/dialog';
 import Modal from 'react-responsive-modal';
 import axios from 'axios';
+import {API_CONNECTION_URL} from '../const';
 
 class Home extends Component {
 
@@ -16,7 +17,7 @@ class Home extends Component {
     };
 
     componentDidMount(){
-        axios.get('http://localhost:5001/drinks').then((response) => {
+        axios.get(API_CONNECTION_URL+'/drinks').then((response) => {
             this.setState({drinks: response.data.drinks});
         })
     }

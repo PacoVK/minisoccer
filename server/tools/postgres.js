@@ -4,7 +4,7 @@ let options = {
     promiseLib: promise
 };
 
-const DB_HOST = 'localhost';
+const DB_HOST = process.env.DB_HOST || 'localhost';
 const DB_PORT = 5432;
 const DB_USER = 'postgres';
 const DB_PASSWD = 'suP3rs3cRe7';
@@ -22,7 +22,7 @@ let pgp = require('pg-promise')(options);
 let db = pgp(connection);
 
 getAllTeams = (req, res, next) => {
-    db.any('select * from teams')
+    db.any('select * from teams order by name')
         .then((data) => {
             res.status(200)
                 .json({
@@ -129,6 +129,20 @@ calculateConsumForTeams = (req, res, next) =>{
         });
 };
 
+resetConsum = (req, res, next) =>{
+    db.none('truncate consum')
+        .then(() => {
+            res.status(200)
+                .json({
+                    status: 'success',
+                    message: 'Dropped all Data from Consum'
+                });
+        })
+        .catch((err) => {
+            return next(err);
+        });
+};
+
 module.exports = {
     getAllTeams: getAllTeams,
     createTeam: createTeam,
@@ -136,5 +150,6 @@ module.exports = {
     getAllDrinks: getAllDrinks,
     createDrink: createDrink,
     createOrder: createOrder,
-    calculateConsumForTeams: calculateConsumForTeams
+    calculateConsumForTeams: calculateConsumForTeams,
+    resetConsum: resetConsum
 };

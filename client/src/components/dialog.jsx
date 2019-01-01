@@ -5,6 +5,7 @@ import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
+import {API_CONNECTION_URL, SOCKET_CONNECTION_URL} from '../const';
 import '../styles/app.css';
 import openSocket from 'socket.io-client';
 
@@ -28,8 +29,8 @@ class Dialog extends PureComponent {
     };
 
     componentDidMount(){
-        socket = openSocket(process.env.SOCKET_CONNECTION_URL || 'http://localhost:8000');
-        axios.get('http://localhost:5001/teams').then((response) => {
+        socket = openSocket(SOCKET_CONNECTION_URL);
+        axios.get(API_CONNECTION_URL+'/teams').then((response) => {
             this.setState({teams: response.data.teams});
         });
     }
@@ -62,7 +63,7 @@ class Dialog extends PureComponent {
         if(this.state.drinkAmount <= 0 || this.state.selectedTeam === ""){
             this.setState({error: true});
         }else {
-            axios.post('http://localhost:5001/order',{
+            axios.post(API_CONNECTION_URL+'/order',{
                 name: this.state.selectedTeam,
                 drink: this.state.selectedDrink,
                 amount: this.state.drinkAmount

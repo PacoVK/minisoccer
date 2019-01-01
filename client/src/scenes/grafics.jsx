@@ -4,6 +4,7 @@ import Header from '../components/header';
 import Grid from '@material-ui/core/Grid';
 import HighscoreTable from '../components/table';
 import axios from 'axios';
+import {API_CONNECTION_URL, SOCKET_CONNECTION_URL} from '../const';
 
 let socket;
 
@@ -20,7 +21,7 @@ class Grafics extends Component {
     };
 
     fetchData() {
-        axios.get('http://localhost:5001/orders').then((response) => {
+        axios.get(API_CONNECTION_URL+'/orders').then((response) => {
             this.setState({
                 teamData: response.data.orders,
             });
@@ -32,7 +33,7 @@ class Grafics extends Component {
     }
 
     componentDidMount() {
-        socket = openSocket(process.env.SOCKET_CONNECTION_URL || 'http://localhost:8000');
+        socket = openSocket(SOCKET_CONNECTION_URL);
         socket.on('update', this.onUpdateData);
         this.fetchData();
     }

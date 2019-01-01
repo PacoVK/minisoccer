@@ -9,7 +9,7 @@
   "private": true,
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "REACT_APP_SERVER_DOMAIN=sgfo.minisoccer.com react-scripts build"
   },
   "dependencies": {
     "@material-ui/core": "^3.6.1",
